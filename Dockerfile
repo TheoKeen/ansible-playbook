@@ -1,4 +1,4 @@
-FROM python:3.11.4-slim-bookworm
+FROM python:3.12.1-slim-bookworm
 MAINTAINER Theo@keennews.nl
 
 RUN set -eux; \
@@ -26,6 +26,11 @@ COPY collections.yml ./
 RUN set -eux; \
         ansible-galaxy collection install -r collections.yml; \
         rm collections.yml;
+
+
+RUN set -eux; \
+        curl -L  https://github.com/docker/compose/releases/download/$(curl --silent https://api.github.com/repos/docker/compose/releases/latest | jq .name -r)/docker-compose-linux-x86_64 -o  /usr/local/bin/docker-compose ; \
+        chmod +x /usr/local/bin/docker-compose;
 
 
 ENTRYPOINT ["/usr/local/bin/ansible-playbook"]

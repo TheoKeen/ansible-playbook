@@ -4,4 +4,4 @@ pynetbox==4.3.3
 paramiko==2.6.0
 proxmoxer
 pyvmomi
-
+jmespath
